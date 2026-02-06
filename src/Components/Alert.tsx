@@ -15,7 +15,7 @@ const Alert = ({ children, onClick }: Props) => {
         data-bs-dismiss="alert"
         aria-label="Close"
         onClick={onClick}
-      ></button>
+      />
     </div>
   );
 };
