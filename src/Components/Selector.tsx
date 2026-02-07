@@ -1,3 +1,5 @@
+import "../Styles/selector.css";
+
 interface Props {
   items: string[];
 }

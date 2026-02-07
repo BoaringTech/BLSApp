@@ -1,4 +1,5 @@
 import Selector from "./Components/Selector";
+import "./App.css";
 import { useState } from "react";
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
 
   return (
     <>
-      <h1>BLS Data Visualizer</h1>
+      <h1 className="container-sm">BLS Data Visualizer</h1>
       <div
         style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
       >
