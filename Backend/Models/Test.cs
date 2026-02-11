@@ -1,4 +1,4 @@
-namespace BLSApp.Backend
+namespace BLSApp.API.Models
 {
     public class Test
     {
