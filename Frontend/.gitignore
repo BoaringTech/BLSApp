@@ -13,6 +13,9 @@ dist-ssr
 *.local
 
 # Editor directories and files
+Backend/.vs/*
+Backend/Debug/
+Backend/Release/
 .vscode/*
 !.vscode/extensions.json
 .idea
