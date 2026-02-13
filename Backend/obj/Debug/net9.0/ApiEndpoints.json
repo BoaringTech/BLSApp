@@ -1,0 +1,55 @@
+[
+  {
+    "ContainingType": "BLSApp.API.EndPoints.StartUpEndPoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapStartUpEndPoints\u003Eb__0_0",
+    "RelativePath": "",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BLSApp.API.EndPoints.StartUpEndPoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapStartUpEndPoints\u003Eb__0_1",
+    "RelativePath": "health",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BLSApp.API.EndPoints.WeatherEndPoints\u002B\u003C\u003Ec",
+    "Method": "\u003CMapWeatherEndpoints\u003Eb__1_0",
+    "RelativePath": "weatherforecast",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "WeatherForecast[]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]
