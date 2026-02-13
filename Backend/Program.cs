@@ -17,7 +17,7 @@ public class Program
             options.AddPolicy(name: MyAllowSpecificOrigins,
                 policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173/") // React dev server
+                    policy.WithOrigins("http://localhost:3000/") // React dev server, 3000
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
