@@ -1,0 +1,6 @@
+@BLSApp.API_HostAddress = http://localhost:5000 <!-- 5000 is easier to remember -->
+
+GET {{BLSApp.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
