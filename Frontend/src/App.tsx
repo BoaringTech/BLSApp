@@ -7,15 +7,18 @@ import "./App.css";
 import CommandButton from "./Components/CommandButton";
 
 function App() {
+  // State variables for each of the components. These are used to store the user's selections and input.
+  const [dataOptionSelected, setDataOptionSelected] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [toggleChartTable, setToggleChartTable] = useState(true);
+  const [toggleTableView, setToggleTableView] = useState(true);
 
   const Reset = () => {
+    setDataOptionSelected(0);
     setStartDate(null);
     setEndDate(null);
-    toggleChartTable && setToggleChartTable(false);
-  };
+    toggleTableView && setToggleTableView(false);
+  }; // Resets all the state to default values
 
   return (
     <>
@@ -24,6 +27,8 @@ function App() {
         style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
       >
         <Selector
+          indexSelected={dataOptionSelected}
+          setIndexSelected={setDataOptionSelected}
           items={[
             "Unemployment Rate over time",
             "Software Engineer job count",
@@ -39,10 +44,10 @@ function App() {
         setEndDate={setEndDate}
       />
       <ToggleableButton
-        trueText="Table View"
         falseText="Chart View"
-        buttonState={toggleChartTable}
-        onClick={() => setToggleChartTable(!toggleChartTable)}
+        trueText="Table View"
+        buttonState={toggleTableView}
+        onClick={() => setToggleTableView(!toggleTableView)}
       />
     </>
   );
