@@ -5,9 +5,11 @@ import ToggleableButton from "./Components/ToggleableButton";
 
 import "./App.css";
 import CommandButton from "./Components/CommandButton";
+import GraphView from "./Components/GraphView";
 
 function App() {
   // State variables for each of the components. These are used to store the user's selections and input.
+  const [jobsSelected, setJobsSelected] = useState(0);
   const [dataOptionSelected, setDataOptionSelected] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -27,28 +29,38 @@ function App() {
         style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
       >
         <Selector
+          indexSelected={jobsSelected}
+          setIndexSelected={setJobsSelected}
+          items={["Software Engineer", "Data Scientist", "Civil Engineer"]}
+        />
+        <Selector
           indexSelected={dataOptionSelected}
           setIndexSelected={setDataOptionSelected}
           items={[
             "Unemployment Rate over time",
-            "Software Engineer job count",
-            "Software Engineer job in Florida",
+            "Job Count",
+            "Job Count in Florida",
           ]}
         />
         <CommandButton text="Reset" onClick={Reset} />
       </div>
-      <DateRange
-        startDate={startDate}
-        endDate={endDate}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
-      />
-      <ToggleableButton
-        falseText="Chart View"
-        trueText="Table View"
-        buttonState={toggleTableView}
-        onClick={() => setToggleTableView(!toggleTableView)}
-      />
+      <div
+        style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
+      >
+        <DateRange
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+        />
+        <ToggleableButton
+          falseText="Chart View"
+          trueText="Table View"
+          buttonState={toggleTableView}
+          onClick={() => setToggleTableView(!toggleTableView)}
+        />
+      </div>
+      <GraphView />
     </>
   );
 }
