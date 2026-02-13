@@ -1,28 +1,50 @@
-//import Selector from "./Components/Selector";
+import { useState } from "react";
+import Selector from "./Components/Selector";
+import DateRange from "./Components/DateRange";
+import ToggleableButton from "./Components/ToggleableButton";
+
 import "./App.css";
-import DisplayWeatherForecast from "./Components/DisplayWeatherForecast";
+import CommandButton from "./Components/CommandButton";
 
 function App() {
-  //const [alertVisible, setAlertVisible] = useState(false);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [toggleChartTable, setToggleChartTable] = useState(true);
+
+  const Reset = () => {
+    setStartDate(null);
+    setEndDate(null);
+    toggleChartTable && setToggleChartTable(false);
+  };
 
   return (
-    <DisplayWeatherForecast />
-
-    // Temporary to test fetching data from the backend, will remove later
-    // <>
-    //   <h1 className="container-sm">BLS Data Visualizer</h1>
-    //   <div
-    //     style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
-    //   >
-    //     <Selector
-    //       items={[
-    //         "Unemployment Rate over time",
-    //         "Software Engineer job count",
-    //         "Software Engineer job in Florida",
-    //       ]}
-    //     />
-    //   </div>
-    // </>
+    <>
+      <h1 className="container-sm">BLS Data Visualizer</h1>
+      <div
+        style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
+      >
+        <Selector
+          items={[
+            "Unemployment Rate over time",
+            "Software Engineer job count",
+            "Software Engineer job in Florida",
+          ]}
+        />
+        <CommandButton text="Reset" onClick={Reset} />
+      </div>
+      <DateRange
+        startDate={startDate}
+        endDate={endDate}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+      />
+      <ToggleableButton
+        trueText="Table View"
+        falseText="Chart View"
+        buttonState={toggleChartTable}
+        onClick={() => setToggleChartTable(!toggleChartTable)}
+      />
+    </>
   );
 }
 
