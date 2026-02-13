@@ -7,7 +7,7 @@ interface Props {
 function Selector({ items }: Props) {
   return (
     <select className="form-select" aria-label="Default select example">
-      <option selected>Open this select menu</option>
+      <option selected>Select data to view</option>
       {items.map((item, index) => (
         <option value={index}>{item}</option>
       ))}
