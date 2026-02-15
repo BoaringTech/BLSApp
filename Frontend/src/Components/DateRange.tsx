@@ -18,7 +18,15 @@ function DateRange({ startDate, endDate, setStartDate, setEndDate }: Props) {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", gap: 3 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        gap: 3,
+        margin: 3,
+        alignContent: "center",
+      }}
+    >
       <label>Date Range:</label>
       <DateSelect dateSelected={startDate} setDate={setStartDate} />
       <DateSelect dateSelected={endDate} setDate={setEndDate} />

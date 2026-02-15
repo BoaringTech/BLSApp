@@ -18,6 +18,7 @@ function App() {
   const [toggleTableView, setToggleTableView] = useState(false);
 
   const Reset = () => {
+    setJobsSelected(0);
     setDataOptionSelected(0);
     setStartDate(null);
     setEndDate(null);
@@ -26,16 +27,18 @@ function App() {
 
   return (
     <>
-      <h1 className="container-sm">BLS Data Visualizer</h1>
-      <div
-        style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
-      >
+      <h1 className="container-sm" style={{ margin: 10 }}>
+        BLS Data Visualizer
+      </h1>
+      <div style={{ display: "flex", flexDirection: "row", gap: 3, margin: 3 }}>
         <Selector
+          defaultText="Select job(s) to view"
           indexSelected={jobsSelected}
           setIndexSelected={setJobsSelected}
           items={["Software Engineer", "Data Scientist", "Civil Engineer"]}
         />
         <Selector
+          defaultText="Select data to view"
           indexSelected={dataOptionSelected}
           setIndexSelected={setDataOptionSelected}
           items={[
@@ -47,8 +50,15 @@ function App() {
         <CommandButton text="Reset" onClick={Reset} />
       </div>
       <div
-        style={{ display: "flex", flexDirection: "row", gap: 3, marginTop: 3 }}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: 3,
+          margin: 3,
+          alignContent: "center",
+        }}
       >
+        <CommandButton text="Fetch" onClick={() => {}} />
         <DateRange
           startDate={startDate}
           endDate={endDate}
@@ -62,7 +72,7 @@ function App() {
           onClick={() => setToggleTableView(!toggleTableView)}
         />
       </div>
-      <div style={{ width: "100%", height: "700px" }}>
+      <div style={{ width: "100%", height: "700px", margin: 3 }}>
         <SwitchView
           state={toggleTableView}
           defaultView={GraphView()}
