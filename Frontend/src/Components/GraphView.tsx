@@ -1,5 +1,7 @@
 function GraphView() {
-  return <div className="placeholder" />;
+  return (
+    <div style={{ backgroundColor: "white", height: "100%", width: "100%" }} />
+  );
 }
 
 export default GraphView;

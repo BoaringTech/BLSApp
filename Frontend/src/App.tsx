@@ -6,6 +6,8 @@ import ToggleableButton from "./Components/ToggleableButton";
 import "./App.css";
 import CommandButton from "./Components/CommandButton";
 import GraphView from "./Components/GraphView";
+import SwitchView from "./Components/SwitchView";
+import TableView from "./Components/TableView";
 
 function App() {
   // State variables for each of the components. These are used to store the user's selections and input.
@@ -13,7 +15,7 @@ function App() {
   const [dataOptionSelected, setDataOptionSelected] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [toggleTableView, setToggleTableView] = useState(true);
+  const [toggleTableView, setToggleTableView] = useState(false);
 
   const Reset = () => {
     setDataOptionSelected(0);
@@ -60,7 +62,13 @@ function App() {
           onClick={() => setToggleTableView(!toggleTableView)}
         />
       </div>
-      <GraphView />
+      <div style={{ width: "100%", height: "700px" }}>
+        <SwitchView
+          state={toggleTableView}
+          defaultView={GraphView()}
+          alternateView={TableView()}
+        />
+      </div>
     </>
   );
 }
