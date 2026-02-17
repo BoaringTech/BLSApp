@@ -1,4 +1,8 @@
+using Serilog.AspNetCore;
+using Serilog.Sinks.File;
 using BLSApp.API.EndPoints;
+using Serilog;
+using BLSApp.API.Services;
 
 public class Program
 {
@@ -9,19 +13,9 @@ public class Program
         // Add services to the container.
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+        string MyAllowSpecificOrigins = ConifgureFrontEndAccess(builder);
 
-        var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-        builder.Services.AddCors(options =>
-        {
-            options.AddPolicy(name: MyAllowSpecificOrigins,
-                policy =>
-                {
-                    policy.WithOrigins("http://localhost:3000/") // React dev server, 3000
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
-                });
-        });
+        AppLogger.Logger.Information("BLS app started!");
 
         var app = builder.Build();
 
@@ -37,5 +31,21 @@ public class Program
         app.UseHttpsRedirection();
         app.MapAllEndpoints();
         app.Run();
+    }
+
+    private static string ConifgureFrontEndAccess(WebApplicationBuilder builder)
+    {
+        var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000/") // React dev server, 3000
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+        });
+        return MyAllowSpecificOrigins;
     }
 }
