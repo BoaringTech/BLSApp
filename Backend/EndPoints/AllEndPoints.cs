@@ -6,7 +6,6 @@
         {
             // Map all endpoint groups
             routes.MapDataEndPoints();
-            routes.MapStartUpEndPoints();
             routes.MapWeatherEndpoints();
             routes.MapFetchEndPoints();
         }

@@ -2,9 +2,16 @@
 
 namespace BLSApp.API.BLS_Access
 {
+    /// <summary>
+    /// Used to fetch data using the BLS API and then stores it locally.
+    /// </summary>
     public class BLSRequester
     {
-        public async void Fetch()
+        /// <summary>
+        /// Calls the BLS API to fetch and store data locally.
+        /// </summary>
+        /// <param name="text">Argument to pass when calling the BLS API.</param>
+        public async void Fetch(string text)
         {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Clear();

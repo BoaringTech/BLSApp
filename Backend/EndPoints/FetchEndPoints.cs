@@ -2,16 +2,25 @@
 
 namespace BLSApp.API.EndPoints
 {
+    /// <summary>
+    /// Maps all Endpoints used to fetch data from the BLS API.
+    /// </summary>
     public static class FetchEndPoints
     {
         public static void MapFetchEndPoints(this IEndpointRouteBuilder routes)
         {
-            routes.MapGet("/fetch", () => TestFetch());
+            routes.MapGet("/fetch", (string text) => TestFetch(text));
         }
 
-        private static void TestFetch()
+        private static IResult TestFetch(string text)
         {
-            new BLSRequester().Fetch();
+            if (string.IsNullOrEmpty(text))
+            {
+                return Results.BadRequest("Text parameter is required");
+            }
+
+            new BLSRequester().Fetch(text);
+            return Results.Ok("Success");
         }
     }
 }
