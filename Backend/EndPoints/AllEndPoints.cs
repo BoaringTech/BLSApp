@@ -8,6 +8,7 @@
             routes.MapDataEndPoints();
             routes.MapStartUpEndPoints();
             routes.MapWeatherEndpoints();
+            routes.MapFetchEndPoints();
         }
     }
 }

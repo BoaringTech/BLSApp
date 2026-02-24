@@ -2,12 +2,12 @@ import { useState } from "react";
 import Selector from "./Components/Selector";
 import DateRange from "./Components/DateRange";
 import ToggleableButton from "./Components/ToggleableButton";
-
-import "./App.css";
 import CommandButton from "./Components/CommandButton";
 import GraphView from "./Components/GraphView";
 import SwitchView from "./Components/SwitchView";
 import TableView from "./Components/TableView";
+
+import "./App.css";
 
 function App() {
   // State variables for each of the components. These are used to store the user's selections and input.
@@ -26,16 +26,23 @@ function App() {
   }; // Resets all the state to default values
 
   return (
-    <>
-      <h1 className="container-sm" style={{ margin: 10 }}>
-        BLS Data Visualizer
-      </h1>
-      <div style={{ display: "flex", flexDirection: "row", gap: 3, margin: 3 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <h1 className="container-sm">BLS Data Visualizer</h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: 8,
+          alignContent: "center",
+          width: "100%",
+        }}
+      >
         <Selector
           defaultText="Select job(s) to view"
           indexSelected={jobsSelected}
           setIndexSelected={setJobsSelected}
           items={["Software Engineer", "Data Scientist", "Civil Engineer"]}
+          className="selectJob"
         />
         <Selector
           defaultText="Select data to view"
@@ -46,6 +53,7 @@ function App() {
             "Job Count",
             "Job Count in Florida",
           ]}
+          className="selectData"
         />
         <CommandButton text="Reset" onClick={Reset} />
       </div>
@@ -53,17 +61,18 @@ function App() {
         style={{
           display: "flex",
           flexDirection: "row",
-          gap: 3,
-          margin: 3,
+          gap: 8,
           alignContent: "center",
+          width: "100%",
+          justifyContent: "space-evenly",
         }}
       >
-        <CommandButton text="Fetch" onClick={() => {}} />
         <DateRange
           startDate={startDate}
           endDate={endDate}
           setStartDate={setStartDate}
           setEndDate={setEndDate}
+          className="dataRange"
         />
         <ToggleableButton
           falseText="Chart View"
@@ -71,15 +80,21 @@ function App() {
           buttonState={toggleTableView}
           onClick={() => setToggleTableView(!toggleTableView)}
         />
+        <CommandButton
+          text="Fetch Data"
+          onClick={() => {
+            fetch("https://localhost:5000/fetch");
+          }}
+        />
       </div>
-      <div style={{ width: "100%", height: "700px", margin: 3 }}>
+      <div style={{ width: "100%", height: "500px" }}>
         <SwitchView
           state={toggleTableView}
           defaultView={GraphView()}
           alternateView={TableView()}
         />
       </div>
-    </>
+    </div>
   );
 }
 

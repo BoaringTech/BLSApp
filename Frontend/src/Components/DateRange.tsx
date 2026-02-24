@@ -5,10 +5,17 @@ interface Props {
   endDate: Date | null;
   setStartDate: (date: Date | null) => void;
   setEndDate: (date: Date | null) => void;
+  className: string;
 }
 
 // This component is used to select a date range. It is used in the App component.
-function DateRange({ startDate, endDate, setStartDate, setEndDate }: Props) {
+function DateRange({
+  startDate,
+  endDate,
+  setStartDate,
+  setEndDate,
+  className,
+}: Props) {
   if (!startDate) {
     setStartDate(GetDateFiveYearsAgo()); // Default to 5 years ago
   }
@@ -22,10 +29,11 @@ function DateRange({ startDate, endDate, setStartDate, setEndDate }: Props) {
       style={{
         display: "flex",
         flexDirection: "row",
-        gap: 3,
-        margin: 3,
         alignContent: "center",
+        gap: 8,
+        margin: 8,
       }}
+      className={className}
     >
       <label>Date Range:</label>
       <DateSelect dateSelected={startDate} setDate={setStartDate} />

@@ -1,3 +1,5 @@
+import "../Styles/Button.css";
+
 interface Props {
   text: string;
   onClick: () => void;

@@ -24,7 +24,7 @@ namespace BLSApp.API.Services
         private static Serilog.Core.Logger CreateLogger()
         {
             return new LoggerConfiguration().WriteTo
-            .File("C:\\Repositories\\BLSApp\\Backend\\Logs\\log.txt",
+            .File("C:\\Repositories\\BLSApp\\Logs\\log.txt",
             rollingInterval: RollingInterval.Day,
             retainedFileCountLimit: null)
             .CreateLogger();

@@ -6,6 +6,7 @@ interface Props {
   indexSelected: number;
   setIndexSelected: (index: number) => void;
   items: string[];
+  className?: string;
 }
 
 function Selector({
@@ -13,6 +14,7 @@ function Selector({
   indexSelected,
   setIndexSelected,
   items,
+  className,
 }: Props) {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setIndexSelected(event.target.selectedIndex);
@@ -20,7 +22,7 @@ function Selector({
 
   return (
     <select
-      className="form-select"
+      className={"form-select" + (className ? " " + className : "")}
       aria-label="Default select example"
       value={indexSelected}
       onChange={handleChange}
