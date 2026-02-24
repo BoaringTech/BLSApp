@@ -64,7 +64,7 @@ function App() {
           gap: 8,
           alignContent: "center",
           width: "100%",
-          justifyContent: "space-evenly",
+          justifyContent: "space-between",
         }}
       >
         <DateRange
@@ -74,18 +74,28 @@ function App() {
           setEndDate={setEndDate}
           className="dataRange"
         />
-        <ToggleableButton
-          falseText="Chart View"
-          trueText="Table View"
-          buttonState={toggleTableView}
-          onClick={() => setToggleTableView(!toggleTableView)}
-        />
-        <CommandButton
-          text="Fetch Data"
-          onClick={() => {
-            fetch("https://localhost:5000/fetch");
+        <div
+          style={{
+            alignContent: "center",
+            display: "flex",
+            flexDirection: "row",
+            gap: 8,
+            padding: 8,
           }}
-        />
+        >
+          <ToggleableButton
+            falseText="Chart View"
+            trueText="Table View"
+            buttonState={toggleTableView}
+            onClick={() => setToggleTableView(!toggleTableView)}
+          />
+          <CommandButton
+            text="Fetch Data"
+            onClick={() => {
+              fetch("https://localhost:5000/fetch");
+            }}
+          />
+        </div>
       </div>
       <div style={{ width: "100%", height: "500px" }}>
         <SwitchView
