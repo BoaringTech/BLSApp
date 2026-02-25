@@ -12,14 +12,22 @@ namespace BLSApp.API.EndPoints
             routes.MapGet("/fetch", (string text) => TestFetch(text));
         }
 
-        private static IResult TestFetch(string text)
+        private async static Task<IResult> TestFetch(string text)
         {
             if (string.IsNullOrEmpty(text))
             {
                 return Results.BadRequest("Text parameter is required");
             }
 
-            new BLSRequester().Fetch(text);
+            try
+            {
+                await new BLSRequester().Fetch(text);
+            }
+            catch (Exception)
+            {
+                return Results.BadRequest("Failure");
+            }
+            
             return Results.Ok("Success");
         }
     }

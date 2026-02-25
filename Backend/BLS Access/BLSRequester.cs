@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Headers;
+﻿using BLSApp.API.Services;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace BLSApp.API.BLS_Access
 {
@@ -7,25 +9,41 @@ namespace BLSApp.API.BLS_Access
     /// </summary>
     public class BLSRequester
     {
+        private readonly HttpClient _httpClient;
+        private readonly JsonSerializerOptions _jsonOptions;
+
+        public BLSRequester()
+        {
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("https://api.bls.gov/publicAPI/v2/");
+
+            _jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true // Helps with JSON property name matching
+            };
+        }
+
         /// <summary>
         /// Calls the BLS API to fetch and store data locally.
         /// </summary>
         /// <param name="text">Argument to pass when calling the BLS API.</param>
-        public async void Fetch(string text)
+        public async Task<string> Fetch(string text)
         {
-            using HttpClient client = new();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
-
-            await ProcessRepositoriesAsync(client);
-        }
-
-        private async Task ProcessRepositoriesAsync(HttpClient client)
-        {
-            var json = await client.GetStringAsync("https://api.github.com/orgs/dotnet/repos");
-            Console.Write(json);
+            try
+            { 
+                HttpResponseMessage response = await _httpClient.GetAsync(text); // Make the GET request to the surveys endpoint
+                response.EnsureSuccessStatusCode(); // Ensure the request was successful
+                string jsonResponse = await response.Content.ReadAsStringAsync(); // Read the response content as a string
+                BLSDataSaver.SaveAsJsonFile(JsonParser.ParseResultFromJsonResponse(jsonResponse), text); // Save the Json Response
+                return jsonResponse; // For now, return the raw JSON to inspect its structure
+            }
+            catch (HttpRequestException ex)
+            {
+                // Handle any HTTP errors (e.g., network issues, non-success status codes)
+                string message = $"Error calling BLS API: {ex.Message}";
+                AppLogger.Logger.Error(message);
+                throw new Exception(message); 
+            }
         }
     }
 }
